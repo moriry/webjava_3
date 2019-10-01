@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+   <title>Shopping</title>
+<!-- Start Cascading Style Sheets -->
+<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+<!-- End Cascading Style Sheets -->
+</head>
+
+<body>
+<img th:src="@{/img/header.PNG}" class="logo d-brock" alt="logo" width="1600" height="90">
+    <!-- Contents -->
+        <div class="container">
+            <form th:action="@{/create-list}" th:object="${item}" method="post">
+            <div class="mt-6 p-3">
+            <!-- エラーメッセージ：普段は非表示 -->
+            <div class="col-sm-12">
+                <ul class="caption form-group alert alert-danger mt-3 text-danger" th:if="${#fields.hasErrors('*')}">
+                    <li style="list-style-position: inside;" th:each="err : ${#fields.errors('*')}" th:text="${err}" />
+                </ul>
+            </div>
+                <div class="table-responsive">
+                    <table class="table blue table-bordered">
+                            <thead>
+                                <th>商品情報</th>
+                                <td colspan="2"></td>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th>商品名(必須)</th>
+                                    <td colspan="2"><input type="text" id="titleInput" th:field="*{itemName}" class="form-control form-1line"></td>
+                                </tr>
+                                <tr>
+                                    <th>値段(必須)</th>
+                                    <td colspan="2"><input type="text" id="titleInput" th:field="*{price}" class="form-control form-1line"></td>
+                                </tr>
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-2">
+                    <button class="btn btn-outline-secondary btn-outline-secondary-cu btn-block " id="back"
+                        type="button" onclick="javascript:history.back();">戻る</button>
+                </div>
+                <div class="col-12 col-md-2">
+                        <button type="submit" class="btn btn-primary btn-primary-cu btn-block ">追加</button>
+                </div>
+            </div>
+          </form>
+        </div>
+</body>
+
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/layout}">
+
+<head>
+   <title>Shopping</title>
+<!-- Start Cascading Style Sheets -->
+<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+<!-- End Cascading Style Sheets -->
+</head>
+
+<body>
+    <img th:src="@{/img/header.PNG}" class="logo d-brock" alt="logo" width="1600" height="90">
+    <!-- Contents -->
+        <div class="container">
+            <div class="mt-6 p-3">
+            <!-- エラーメッセージ：普段は非表示 -->
+            <div class="col-sm-12">
+                <ul class="caption form-group alert alert-danger mt-3 text-danger" th:if="${errorMessage} != null">
+                    <li style="list-style-position: inside;" th:text="${errorMessage}" />
+                </ul>
+            </div>
+            <form th:action="@{/shopping}" method="POST" th:object="${order}">
+                <div class="table-responsive">
+                    <table class="table text-nowrap mt-2">
+                        <thead>
+                            <tr>
+                                <th>商品名</th>
+                                <th>値段</th>
+                                <th>個数</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+		                <tr th:each="item, stat : ${item}">
+		                    <td>
+		                        <span th:text="${item.itemName}"></span>
+		                    </td>
+		                    <td>
+		                        <span th:text="'&yen;' + ${item.price}"></span>
+		                    </td>
+		                    <td>
+		                        <input type="number" class="form-control form-1line col-sm-3" id="itemCount" th:field="*{orderList[__${stat.index}__].itemCount}">
+		                    </td>
+		                    <td>
+		                        <button type="submit" class="btn btn-primary btn-primary-cu">カートに追加</button>
+		                    </td>
+		                </tr>
+		                </tbody>
+		                    </table>
+		                    </form>
+		                </div>
+		            </div>
+               <div class="row justify-content-center">
+                <div class="col-12 col-md-2">
+                    <form th:action="@{/delete-cart}" method="POST">
+                        <button type="submit" class="btn btn-outline-secondary btn-outline-secondary-cu">カート情報削除</button>
+                    </form>
+                </div>
+                <div class="col-12 col-md-2">
+                    <form th:action="@{/show-cart}" method="POST">
+                        <button type="submit" class="btn btn-primary btn-primary-cu">カート情報表示</button>
+                    </form>
+                </div>
+            </div>
+            <div class="mt-5">
+                <a class="d-block" th:href="@{/management}">
+                    <u>管理者の方はコチラ</u>
+                </a>
+            </div>
+        </div>
+</body>
+
+</html>

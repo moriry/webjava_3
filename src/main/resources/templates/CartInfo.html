@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+   <title>Shopping</title>
+<!-- Start Cascading Style Sheets -->
+<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+<!-- End Cascading Style Sheets -->
+</head>
+
+<body>
+<img th:src="@{/img/header.PNG}" class="logo d-brock" alt="logo" width="1600" height="90">
+<!-- Contents -->
+<div class="container">
+    <div class="mt-6 p-3">
+         <div class="font-weight-bold">
+             カート内情報
+         </div>
+        <form th:action="@{/shopping}" method="POST" th:object="${order}">
+        <div class="table-responsive mt-2">
+            <table class="table text-nowrap mt-2">
+                <thead>
+                    <tr>
+                        <th>商品名</th>
+                        <th>値段</th>
+                        <th>注文個数</th>
+                        <th>合計金額</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:if="${order}  == null">
+                            <td th:text=カート内に商品はありません></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                    </tr>
+                    <tr th:if="${order} != null" th:each="item, stat : ${item}">
+                    <td>
+                        <span th:text="${item.itemName}"></span>
+                    </td>
+                    <td>
+                        <span th:text="'&yen;' + ${item.price}"></span>
+                    </td>
+                    <td>
+                        <span th:text="*{orderList[__${stat.index}__].itemCount} + '個'"></span>
+                    </td>
+                    <td>
+                        <span th:text="'&yen;' + ${item.price} * *{orderList[__${stat.index}__].itemCount}"></span>
+                    </td>
+                    <tr th:if="${order} != null">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td th:text="'&yen;' + ${totalPrice}"></td>
+                    </tr>
+                </tbody>
+            </table>
+            </form>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-2">
+            <button class="btn btn-outline-secondary btn-outline-secondary-cu btn-block " id="back"
+                type="button" onclick="javascript:history.back();">戻る</button>
+         </div>
+     </div>
+</body>
+
+</html>

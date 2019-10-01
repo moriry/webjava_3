@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+   <title>MORIZON</title>
+<!-- Start Cascading Style Sheets -->
+<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+<!-- End Cascading Style Sheets -->
+</head>
+
+<body>
+    <div class="mt-5 mb-5">
+       <img th:src="@{/img/morizon.PNG}" class="img-fluid mx-auto d-block">
+    </div>
+    <form th:action="@{/shopping}" method="GET" th:object="${order}">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-1">
+            <button class="btn btn-primary btn-primary-cu btn-block " type="submit">スタート</button>
+         </div>
+     </div>
+     </form>
+</body>
+
+</html>
